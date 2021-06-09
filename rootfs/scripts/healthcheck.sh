@@ -28,7 +28,8 @@ else
 fi
 
 # check port 30005 is open
-if [ $(netstat -an | grep LISTEN | grep ":30005" | wc -l) -ge 1 ]; then
+# shellcheck disable=SC2046
+if [ $(netstat -an | grep LISTEN | grep -c ":30005") -ge 1 ]; then
    echo "TCP port 30005 open. HEALTHY"
 else
    echo "TCP port 30005 not open. UNHEALTHY"
