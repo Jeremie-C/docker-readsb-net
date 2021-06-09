@@ -1,4 +1,4 @@
-name: Check Shell and Dockerfile
+name: Check Code
 
 on:
   push:

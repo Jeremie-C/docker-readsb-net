@@ -1,8 +1,10 @@
 # docker-readsb-net
 
+![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/jeremiec82/readsb-net?style=plastic)
+![Docker Pulls](https://img.shields.io/docker/pulls/jeremiec82/readsb-net?style=plastic)
 [![Deploy to Docker Hub](https://github.com/Jeremie-C/docker-readsb-net/actions/workflows/deploy.yml/badge.svg)](https://github.com/Jeremie-C/docker-readsb-net/actions/workflows/deploy.yml)
-[![Check Shell and Dockerfile](https://github.com/Jeremie-C/docker-readsb-net/actions/workflows/check_code.yml/badge.svg)](https://github.com/Jeremie-C/docker-readsb-net/actions/workflows/check_code.yml)
-[![Test Docker Build](https://github.com/Jeremie-C/docker-readsb-net/actions/workflows/test_build.yml/badge.svg)](https://github.com/Jeremie-C/docker-readsb-net/actions/workflows/test_build.yml)
+[![Check Code](https://github.com/Jeremie-C/docker-readsb-net/actions/workflows/check_code.yml/badge.svg)](https://github.com/Jeremie-C/docker-readsb-net/actions/workflows/check_code.yml)
+[![Docker Build](https://github.com/Jeremie-C/docker-readsb-net/actions/workflows/test_build.yml/badge.svg)](https://github.com/Jeremie-C/docker-readsb-net/actions/workflows/test_build.yml)
 
 Mode-S/ADSB/TIS decoder running in a docker container.
 
