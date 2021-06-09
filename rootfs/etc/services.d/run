@@ -1,0 +1,43 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+# Set readsb binary
+READSB_BIN="/usr/bin/readsb"
+# Base Config
+READSB_CMD=("--net-only")
+READSB_CMD+=("--quiet")
+READSB_CMD+=("--write-json=/run/readsb")
+READSB_CMD+=("--json-location-accuracy=2")
+READSB_CMD+=("--forward-mlat")
+READSB_CMD+=("--gnss")
+READSB_CMD+=("--modeac")
+READSB_CMD+=("--net-bo-port=30005")
+
+# Handle "-e LAT"
+if [[ -n "$LAT" ]]; then
+    READSB_CMD+=("--lat=$LAT")
+fi
+# Handle "-e LON"
+if [[ -n "$LON" ]]; then
+    READSB_CMD+=("--lon=$LON")
+fi
+# Handle "-e BEAST_HOST" & "-e BEAST_PORT"
+READSB_CMD+=("--net-connector=$BEAST_HOST,$BEAST_PORT,beast_in")
+# Handle "--net-connector=<ip,port,protocol>"
+if [[ -n "$NET_CONNECTOR" ]]; then
+    IFS=';' read -r -a NET_CONNECTOR_ARRAY <<< "$NET_CONNECTOR"
+    for NET_CONNECTOR_ELEMENT in "${NET_CONNECTOR_ARRAY[@]}"
+    do
+        READSB_CMD+=("--net-connector=$NET_CONNECTOR_ELEMENT")
+    done
+fi
+# Handle "-e NET_CONNECTOR_DELAY"
+if [[ -n "$NET_CONNECTOR_DELAY" ]]; then
+    READSB_CMD+=("--net-connector-delay=$NET_CONNECTOR_DELAY")
+fi
+
+# LAUNCH READSB
+set -eo pipefail
+# shellcheck disable=SC2016
+"${READSB_BIN}" "${READSB_CMD[@]}" \
+  2>&1 | stdbuf -o0 sed --unbuffered '/^$/d' | stdbuf -o0 awk '{print "[readsb] " strftime("%Y/%m/%d %H:%M:%S", systime()) " " $0}'

@@ -1,0 +1,5 @@
+.editorconfig
+todo.txt
+notes.txt
+*.pyc
+venv
