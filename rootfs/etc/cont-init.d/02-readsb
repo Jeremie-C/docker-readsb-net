@@ -1,6 +1,5 @@
 #!/usr/bin/with-contenv bash
 # shellcheck shell=bash
-# shellcheck disable=SC2034
 
 # Define bash colours
 NOCOLOR='\033[0m'
