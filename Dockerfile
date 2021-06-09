@@ -2,6 +2,8 @@ FROM debian:buster-slim
 
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
 COPY rootfs/ /
 
 RUN apt-get update && apt-get upgrade -y && \
@@ -12,23 +14,20 @@ RUN apt-get update && apt-get upgrade -y && \
   ca-certificates wget \
   # Readsb
   git build-essential libncurses-dev zlib1g-dev && \
-  # Nettoyage
-  rm -rf /var/lib/apt/lists/*
+  # S6 OVERLAY
+  chmod +x /scripts/s6-overlay.sh && \
+  /scripts/s6-overlay.sh && \
+  rm /scripts/s6-overlay.sh
 
-# S6 OVERLAY
-RUN chmod +x /tmp/s6-overlay.sh && /tmp/s6-overlay.sh && rm /tmp/s6-overlay.sh
-
-RUN cd /tmp/ && \
-  git clone --depth 1 https://github.com/wiedehopf/readsb.git && \
-  cd readsb && \
-  BRANCH_READSB=$(git tag --sort="-creatordate" | head -1) && \
+RUN git clone --branch=dev --single-branch --depth=1 https://github.com/wiedehopf/readsb.git /tmp/readsb && \
+  pushd /tmp/readsb || exit 1 && \
   make RTLSDR=no HAVE_BIASTEE=no BLADERF=no PLUTOSDR=no AGGRESSIVE=no && \
   cp -v /tmp/readsb/readsb /usr/bin/readsb && \
   cp -v /tmp/readsb/viewadsb /usr/bin/viewadsb && \
   echo "readsb $(/usr/bin/readsb --version)" >> /VERSIONS && \
-  readsb --version | cut -d ' ' -f2- > /CONTAINER_VERSION
-
-RUN mkdir /run/readsb
+  readsb --version | cut -d ' ' -f2- > /CONTAINER_VERSION && \
+  popd && \
+  mkdir /run/readsb
 
 # Nettoyage
 RUN apt-get remove -y ca-certificates wget git build-essential libncurses-dev zlib1g-dev && \
