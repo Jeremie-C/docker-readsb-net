@@ -17,7 +17,8 @@ RUN apt-get update && apt-get upgrade -y && \
   # S6 OVERLAY
   chmod +x /scripts/s6-overlay.sh && \
   /scripts/s6-overlay.sh && \
-  rm /scripts/s6-overlay.sh
+  rm /scripts/s6-overlay.sh && \
+  chmod +x /scripts/healthcheck.sh
 
 RUN git clone --branch=dev --single-branch --depth=1 https://github.com/wiedehopf/readsb.git /tmp/readsb && \
   pushd /tmp/readsb || exit 1 && \
@@ -36,6 +37,6 @@ RUN apt-get remove -y ca-certificates wget git build-essential libncurses-dev zl
 
 ENTRYPOINT ["/init"]
 
-HEALTHCHECK --start-period=3600s --interval=600s CMD /scripts/healthcheck.sh
+HEALTHCHECK --start-period=60s --interval=300s CMD /scripts/healthcheck.sh
 
 LABEL maintainer="Jeremie-C <Jeremie-C@users.noreply.github.com>"

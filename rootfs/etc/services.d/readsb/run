@@ -23,6 +23,7 @@ if [[ -n "$LON" ]]; then
 fi
 # Handle "-e BEAST_HOST" & "-e BEAST_PORT"
 READSB_CMD+=("--net-connector=$BEAST_HOST,$BEAST_PORT,beast_in")
+
 # Handle "--net-connector=<ip,port,protocol>"
 if [[ -n "$NET_CONNECTOR" ]]; then
     IFS=';' read -r -a NET_CONNECTOR_ARRAY <<< "$NET_CONNECTOR"
