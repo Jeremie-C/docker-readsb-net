@@ -1,0 +1,11 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+mkdir -p /var/readsb/readsb
+ln -snf /var/readsb/readsb /run/readsb || true
+
+mkdir -p /var/readsb/globe_history
+ln -snf /var/readsb/globe_history /var/globe_history || true
+
+mkdir -p /var/db/
+curl -o /var/db/aircraft.csv.gz https://github.com/wiedehopf/tar1090-db/raw/csv/aircraft.csv.gz

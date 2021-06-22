@@ -1,3 +1,4 @@
 #!/usr/bin/execlineb -S0
 # shellcheck shell=bash
-s6-svscanctl -t /var/run/s6/services
+
+s6-svc -d /var/run/s6/services/readsb
