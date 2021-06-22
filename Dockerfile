@@ -9,7 +9,7 @@ COPY rootfs/ /
 RUN apt-get update && apt-get upgrade -y && \
   apt-get install -y --no-install-recommends \
   # Required always
-  gawk libncurses6 net-tools jq bc \
+  curl gawk libncurses6 net-tools jq bc \
   # S6 Install
   ca-certificates wget \
   # Readsb
