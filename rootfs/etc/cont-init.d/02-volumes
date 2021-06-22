@@ -7,8 +7,5 @@ ln -snf /var/readsb/readsb /run/readsb || true
 mkdir -p /var/readsb/globe_history
 ln -snf /var/readsb/globe_history /var/globe_history || true
 
-mkdir -p /var/readsb/state
-ln -snf /var/readsb/state /var/state || true
-
 mkdir -p /var/db/
-curl -o /var/db/aircraft.csv.gz https://github.com/wiedehopf/tar1090-db/raw/csv/aircraft.csv.gz
+curl -o /var/db/aircraft.csv.gz https://raw.githubusercontent.com/wiedehopf/tar1090-db/csv/aircraft.csv.gz 

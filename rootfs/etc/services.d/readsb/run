@@ -12,19 +12,18 @@ READSB_CMD+=("--max-range=500")
 READSB_CMD+=("--gnss")
 READSB_CMD+=("--modeac")
 READSB_CMD+=("--db-file=/var/db/aircraft.csv.gz")
-READSB_CMD+=("--stats-every=60")
+READSB_CMD+=("--stats-every=3000")
 # json
 READSB_CMD+=("--write-json=/run/readsb")
 READSB_CMD+=("--json-location-accuracy=2")
 READSB_CMD+=("--json-reliable=1")
 READSB_CMD+=("--json-trace-interval=15")
-READSB_CMD+=("--write-json-globe-index")
-READSB_CMD+=("--write-state=/var/state")
+#READSB_CMD+=("--write-json-globe-index")
+READSB_CMD+=("--write-state=/run/readsb")
 # Heatmap
 READSB_CMD+=("--heatmap-dir=/var/globe_history")
 READSB_CMD+=("--heatmap=10")
 # NetWork
-READSB_CMD+=("--net-bi-port=30004")
 READSB_CMD+=("--net-bo-port=30005")
 
 # Handle "-e BEAST_HOST" & "-e BEAST_PORT"
