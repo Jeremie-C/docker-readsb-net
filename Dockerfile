@@ -26,7 +26,7 @@ RUN apt-get update && apt-get upgrade -y && \
   cp -v /src/readsb/viewadsb /usr/bin/viewadsb && \
   popd && \
   mkdir -p /var/readsb/ && \
-  apt-get remove -y ca-certificates git build-essential libncurses-dev zlib1g-dev && \
+  apt-get remove -y git build-essential libncurses-dev zlib1g-dev && \
   apt-get autoremove -y && \
   rm -rf /src/* /scripts /var/lib/apt/lists/*
 
