@@ -18,25 +18,22 @@ RUN apt-get update && apt-get upgrade -y && \
   chmod +x /scripts/s6-overlay.sh && \
   /scripts/s6-overlay.sh && \
   rm /scripts/s6-overlay.sh && \
-  chmod +x /scripts/healthcheck.sh
-
-RUN git clone --branch=dev --single-branch --depth=1 https://github.com/wiedehopf/readsb.git /tmp/readsb && \
-  pushd /tmp/readsb || exit 1 && \
+  chmod +x /healthcheck.sh && \
+  git clone --branch=dev --single-branch --depth=1 https://github.com/wiedehopf/readsb.git /src/readsb && \
+  pushd /src/readsb || exit 1 && \
   make RTLSDR=no HAVE_BIASTEE=no BLADERF=no PLUTOSDR=no AGGRESSIVE=no && \
-  cp -v /tmp/readsb/readsb /usr/bin/readsb && \
-  cp -v /tmp/readsb/viewadsb /usr/bin/viewadsb && \
-  echo "readsb $(/usr/bin/readsb --version)" >> /VERSIONS && \
-  readsb --version | cut -d ' ' -f2- > /CONTAINER_VERSION && \
+  cp -v /src/readsb/readsb /usr/bin/readsb && \
+  cp -v /src/readsb/viewadsb /usr/bin/viewadsb && \
   popd && \
-  mkdir /run/readsb
-
-# Nettoyage
-RUN apt-get remove -y ca-certificates wget git build-essential libncurses-dev zlib1g-dev && \
+  mkdir -p /var/readsb/ && \
+  apt-get remove -y ca-certificates git build-essential libncurses-dev zlib1g-dev && \
   apt-get autoremove -y && \
-  rm -rf /tmp/* /var/lib/apt/lists/*
+  rm -rf /src/* /scripts /var/lib/apt/lists/*
 
 ENTRYPOINT ["/init"]
 
-HEALTHCHECK --start-period=60s --interval=300s CMD /scripts/healthcheck.sh
+EXPOSE 30005/tcp
+VOLUME ["/var/readsb/"]
 
+HEALTHCHECK --start-period=60s --interval=300s CMD /healthcheck.sh
 LABEL maintainer="Jeremie-C <Jeremie-C@users.noreply.github.com>"

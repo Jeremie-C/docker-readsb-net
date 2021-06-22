@@ -6,21 +6,28 @@ READSB_BIN="/usr/bin/readsb"
 # Base Config
 READSB_CMD=("--net-only")
 READSB_CMD+=("--quiet")
-READSB_CMD+=("--write-json=/run/readsb")
-READSB_CMD+=("--json-location-accuracy=2")
-READSB_CMD+=("--forward-mlat")
+READSB_CMD+=("--lat=${LATITUDE}")
+READSB_CMD+=("--lon=${LONGITUDE}")
+READSB_CMD+=("--max-range=500")
 READSB_CMD+=("--gnss")
 READSB_CMD+=("--modeac")
+READSB_CMD+=("--mlat")
+READSB_CMD+=("--forward-mlat")
+READSB_CMD+=("--db-file=/var/db/aircraft.csv.gz")
+# json
+READSB_CMD+=("--write-json=/run/readsb")
+READSB_CMD+=("--json-location-accuracy=2")
+READSB_CMD+=("--json-reliable=1")
+READSB_CMD+=("--json-trace-interval=15")
+READSB_CMD+=("--write-json-globe-index")
+READSB_CMD+=("--write-state=/run/readsb")
+# Heatmap
+READSB_CMD+=("--heatmap-dir=/var/globe_history")
+READSB_CMD+=("--heatmap=10")
+# NetWork
+READSB_CMD+=("--net-bi-port=30004")
 READSB_CMD+=("--net-bo-port=30005")
 
-# Handle "-e LAT"
-if [[ -n "$LAT" ]]; then
-    READSB_CMD+=("--lat=$LAT")
-fi
-# Handle "-e LON"
-if [[ -n "$LON" ]]; then
-    READSB_CMD+=("--lon=$LON")
-fi
 # Handle "-e BEAST_HOST" & "-e BEAST_PORT"
 READSB_CMD+=("--net-connector=$BEAST_HOST,$BEAST_PORT,beast_in")
 
@@ -32,6 +39,7 @@ if [[ -n "$NET_CONNECTOR" ]]; then
         READSB_CMD+=("--net-connector=$NET_CONNECTOR_ELEMENT")
     done
 fi
+
 # Handle "-e NET_CONNECTOR_DELAY"
 if [[ -n "$NET_CONNECTOR_DELAY" ]]; then
     READSB_CMD+=("--net-connector-delay=$NET_CONNECTOR_DELAY")

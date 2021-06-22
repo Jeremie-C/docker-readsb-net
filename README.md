@@ -24,8 +24,8 @@ Where the default value is "Unset", `readsb`'s default will be used.
 
 | Variable | Description | Controls which `readsb` option | Default |
 |----------|-------------|--------------------------------|---------|
-| `LAT` | Reference/receiver surface latitude | `--lat=<lat>` | Required |
-| `LON` | Reference/receiver surface longitude | `--lon=<lon>` | Required |
+| `LATITUDE` | Reference/receiver surface latitude | `--lat=<lat>` | Required |
+| `LONGITUDE` | Reference/receiver surface longitude | `--lon=<lon>` | Required |
 | `BEAST_HOST` | IP of remote readsb / dump1090 server | | Required |
 | `BEAST_PORT` | Port of remote dump190 server specified as argument `--net-bo-port`' on remote system | | Required |
 | `NET_CONNECTOR` | See "`NET_CONNECTOR` syntax" below. | `--net-connector=<ip,port,protocol>` | Unset |
