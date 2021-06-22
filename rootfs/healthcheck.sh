@@ -21,6 +21,7 @@ else
 fi
 
 # check port 30005 is open
+# shellcheck disable=SC2046
 if [ $(netstat -an | grep LISTEN | grep -c ":30005") -ge 1 ]; then
    echo "TCP port 30005 open. HEALTHY"
 else
