@@ -18,7 +18,7 @@ READSB_CMD+=("--write-json=/run/readsb")
 READSB_CMD+=("--json-location-accuracy=2")
 READSB_CMD+=("--json-reliable=1")
 READSB_CMD+=("--json-trace-interval=15")
-#READSB_CMD+=("--write-json-globe-index")
+READSB_CMD+=("--write-json-globe-index")
 READSB_CMD+=("--write-state=/run/readsb")
 # Heatmap
 READSB_CMD+=("--heatmap-dir=/var/globe_history")
