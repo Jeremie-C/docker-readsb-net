@@ -54,4 +54,4 @@ This variable allows you to configure outgoing connections. The variable takes a
 ## Paths & Volumes
 
 | Path in container | Detail |
-| /run/readsb | Readsb output files & history. Required if you want to use my Tar1090 container. |
+| /var/readsb | Readsb output files & history. Required if you want to use my Tar1090 container. |
