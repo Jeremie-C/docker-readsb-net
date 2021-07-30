@@ -8,6 +8,11 @@
 
 Mode-S/ADSB/TIS decoder running in a docker container.
 
+## Ports
+
+| Port | Detail |
+| 30005/tcp | Beast protocol output. Optional. |
+
 ## Environment Variables
 
 ### Container Options
@@ -30,6 +35,7 @@ Where the default value is "Unset", `readsb`'s default will be used.
 | `BEAST_PORT` | Port of remote dump190 server specified as argument `--net-bo-port`' on remote system | | Required |
 | `NET_CONNECTOR` | See "`NET_CONNECTOR` syntax" below. | `--net-connector=<ip,port,protocol>` | Unset |
 | `NET_CONNECTOR_DELAY` | Outbound re-connection delay. | `--net-connector-delay=<seconds>` | `30` |
+| `READSB_JSON_GLOBE` | Write specially indexed globe_xxxx.json files | `no` |
 
 #### `NET_CONNECTOR` syntax
 
@@ -44,3 +50,8 @@ This variable allows you to configure outgoing connections. The variable takes a
   * `raw_in`: Raw input
   * `sbs_out`: SBS-format output
   * `vrs_out`: SBS-format output
+
+## Paths & Volumes
+
+| Path in container | Detail |
+| /run/readsb | Readsb output files & history. Required if you want to use my Tar1090 container. |
