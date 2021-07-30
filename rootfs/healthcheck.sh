@@ -29,7 +29,8 @@ else
    EXITCODE=1
 fi
 
-READSB_DEATHS=$(s6-svdt /run/s6/services/readsb | grep -cv "exitcode 0")
+# shellcheck disable=SC2126
+READSB_DEATHS=$(s6-svdt /run/s6/services/readsb | grep -v "exitcode 0" | wc -l)
 if [ "$READSB_DEATHS" -ge 1 ]; then
     echo "readsb deaths: $READSB_DEATHS. UNHEALTHY"
     EXITCODE=1
