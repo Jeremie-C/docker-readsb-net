@@ -20,7 +20,11 @@ READSB_CMD+=("--json-reliable=1")
 READSB_CMD+=("--json-trace-interval=15")
 READSB_CMD+=("--write-state=/run/readsb")
 # json globe index
-if [[ "$READSB_JSON_GLOBE" == "yes" ]]; then
+if [ "$READSB_JSON_GLOBE" == "yes" ]; then
+  READSB_CMD+=("--write-json-globe-index")
+fi
+# json globe index
+if [ "$READSB_JSON_GLOBE" == "yes" ]; then
   READSB_CMD+=("--write-json-globe-index")
 fi
 # Heatmap
@@ -28,6 +32,11 @@ READSB_CMD+=("--heatmap-dir=/var/globe_history")
 READSB_CMD+=("--heatmap=10")
 # NetWork
 READSB_CMD+=("--net-bo-port=30005")
+READSB_CMD+=("--net-bi-port=30104")
+# Handle "-e READSB_FORWARD_MLAT"
+if [ "$READSB_FORWARD_MLAT" == "yes" ]; then
+    READSB_CMD+=("forward-mlat")
+fi
 # Handle "-e BEAST_HOST" & "-e BEAST_PORT"
 READSB_CMD+=("--net-connector=$BEAST_HOST,$BEAST_PORT,beast_in")
 # Handle "--net-connector=<ip,port,protocol>"
