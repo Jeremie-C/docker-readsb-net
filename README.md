@@ -1,3 +1,4 @@
+<!-- markdownlint-disable-file MD013 -->
 # docker-readsb-net
 
 ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/jeremiec82/readsb-net?style=plastic)

@@ -8,21 +8,18 @@ READSB_CMD=("--net-only")
 READSB_CMD+=("--quiet")
 READSB_CMD+=("--lat=${LATITUDE}")
 READSB_CMD+=("--lon=${LONGITUDE}")
-READSB_CMD+=("--max-range=500")
+READSB_CMD+=("--max-range 500")
 READSB_CMD+=("--gnss")
 READSB_CMD+=("--modeac")
 READSB_CMD+=("--db-file=/var/db/aircraft.csv.gz")
-READSB_CMD+=("--stats-every=3000")
+READSB_CMD+=("--stats-range")
+READSB_CMD+=("--stats-every 1800")
 # json
 READSB_CMD+=("--write-json=/run/readsb")
-READSB_CMD+=("--json-location-accuracy=2")
-READSB_CMD+=("--json-reliable=1")
-READSB_CMD+=("--json-trace-interval=15")
+READSB_CMD+=("--json-location-accuracy 2")
+READSB_CMD+=("--json-reliable 1")
+READSB_CMD+=("--json-trace-interval 15")
 READSB_CMD+=("--write-state=/run/readsb")
-# json globe index
-if [ "$READSB_JSON_GLOBE" == "yes" ]; then
-  READSB_CMD+=("--write-json-globe-index")
-fi
 # json globe index
 if [ "$READSB_JSON_GLOBE" == "yes" ]; then
   READSB_CMD+=("--write-json-globe-index")
@@ -35,7 +32,7 @@ READSB_CMD+=("--net-bo-port=30005")
 READSB_CMD+=("--net-bi-port=30104")
 # Handle "-e READSB_FORWARD_MLAT"
 if [ "$READSB_FORWARD_MLAT" == "yes" ]; then
-    READSB_CMD+=("forward-mlat")
+    READSB_CMD+=("--forward-mlat")
 fi
 # Handle "-e BEAST_HOST" & "-e BEAST_PORT"
 READSB_CMD+=("--net-connector=$BEAST_HOST,$BEAST_PORT,beast_in")
