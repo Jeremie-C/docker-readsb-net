@@ -1,5 +1,5 @@
 # docker-readsb-net
-<!-- markdownlint-disable-file MD013 -->
+
 ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/jeremiec82/readsb-net?style=plastic)
 ![Docker Pulls](https://img.shields.io/docker/pulls/jeremiec82/readsb-net?style=plastic)
 [![Deploy to Docker Hub](https://github.com/Jeremie-C/docker-readsb-net/actions/workflows/deploy.yml/badge.svg)](https://github.com/Jeremie-C/docker-readsb-net/actions/workflows/deploy.yml)
