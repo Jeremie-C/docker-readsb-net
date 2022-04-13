@@ -11,6 +11,7 @@ Mode-S/ADSB/TIS decoder running in a docker container.
 ## Ports
 
 | Port | Detail |
+| ---- | ------ |
 | 30005/tcp | Beast protocol output. Optional. Allow other applications outside docker host to receive the data provided by readsb |
 | 30104/tcp | Beast protocol input. Optional. Allow other applications (dump1090, mlat-client) outside docker host to send data to readsb |
 
@@ -19,7 +20,7 @@ Mode-S/ADSB/TIS decoder running in a docker container.
 ### Container Options
 
 | Variable | Description | Default |
-|----------|-------------|---------|
+| -------- | ----------- | ------- |
 | `TZ` | Local timezone in ["TZ database name" format](<https://en.wikipedia.org/wiki/List_of_tz_database_time_zones>). | `UTC` |
 
 ### `readsb` General Options
@@ -29,7 +30,7 @@ Where the default value is "Required", the container not start without it.
 Where the default value is "Unset", `readsb`'s default will be used.
 
 | Variable | Description | Controls which `readsb` option | Default |
-|----------|-------------|--------------------------------|---------|
+| -------- | ----------- | ------------------------------ | ------- |
 | `LATITUDE` | Reference/receiver surface latitude | `--lat=<lat>` | Required |
 | `LONGITUDE` | Reference/receiver surface longitude | `--lon=<lon>` | Required |
 | `BEAST_HOST` | IP of remote readsb / dump1090 server | | Required |
@@ -56,4 +57,5 @@ This variable allows you to configure outgoing connections. The variable takes a
 ## Paths & Volumes
 
 | Path in container | Detail |
+| ----------------- | ------ |
 | /var/readsb | Readsb output files & history. Required if you want to use my Tar1090 container. |

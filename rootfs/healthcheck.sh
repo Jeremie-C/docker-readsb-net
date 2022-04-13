@@ -15,6 +15,14 @@ if [ -f "/run/readsb/aircraft.json" ]; then
   else
       echo "readsb last updated: ${TIMESTAMP_LAST_READSB_UPDATE}, now: ${TIMESTAMP_NOW}, delta: ${TIMEDELTA}. HEALTHY"
   fi
+  # get number of aircraft
+  NUM_AIRCRAFT=$(jq '.aircraft | length' < /var/readsb/readsb/aircraft.json)
+  if [ "$NUM_AIRCRAFT" -lt 1 ]; then
+      echo "total aircraft: $NUM_AIRCRAFT. UNHEALTHY"
+      EXITCODE=1
+  else
+      echo "total aircraft: $NUM_AIRCRAFT. HEALTHY"
+  fi
 else
   echo "ERROR: Cannot find /run/readsb/aircraft.json!"
   EXITCODE=1
@@ -26,6 +34,15 @@ if [ $(netstat -an | grep LISTEN | grep -c ":30005") -ge 1 ]; then
    echo "TCP port 30005 open. HEALTHY"
 else
    echo "TCP port 30005 not open. UNHEALTHY"
+   EXITCODE=1
+fi
+
+# check port 30104 is open
+# shellcheck disable=SC2046
+if [ $(netstat -an | grep LISTEN | grep -c ":30104") -ge 1 ]; then
+   echo "TCP port 30104 open. HEALTHY"
+else
+   echo "TCP port 30104 not open. UNHEALTHY"
    EXITCODE=1
 fi
 

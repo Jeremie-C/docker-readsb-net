@@ -33,6 +33,7 @@ RUN apt-get update && apt-get upgrade -y && \
 ENTRYPOINT ["/init"]
 
 EXPOSE 30005/tcp
+EXPOSE 30104/tcp
 VOLUME ["/var/readsb/"]
 
 HEALTHCHECK --start-period=60s --interval=300s CMD /healthcheck.sh
